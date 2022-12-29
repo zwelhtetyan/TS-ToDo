@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import Todo from '../models/todo';
 
 type TodoContextObj = {
@@ -16,7 +16,9 @@ const TodoContext = createContext<TodoContextObj>({
 const TodoContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(
+    JSON.parse(localStorage.getItem('todos') || '[]')
+  );
 
   const addNewTodoHandler = (newTodo: string) => {
     const newTodoObject = new Todo(newTodo);
@@ -25,6 +27,11 @@ const TodoContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const removeTodoHandler = (todoId: number) =>
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoId));
+
+  useEffect(
+    () => localStorage.setItem('todos', JSON.stringify(todos)),
+    [todos.length]
+  );
 
   const contextValue: TodoContextObj = {
     todos,
