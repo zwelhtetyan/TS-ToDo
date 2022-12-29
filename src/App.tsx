@@ -11,10 +11,13 @@ export default function App() {
     setTodos((prevTodos) => [newTodoObject, ...prevTodos]);
   };
 
+  const removeTodoHandler = (todoId: number) =>
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoId));
+
   return (
     <div>
       <NewTodo addNewTodoHandler={addNewTodoHandler} />
-      <Todos items={todos} />
+      <Todos items={todos} removeTodoHandler={removeTodoHandler} />
     </div>
   );
 }
