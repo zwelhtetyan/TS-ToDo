@@ -2,7 +2,7 @@ import { useTodoContext } from '../context/todo-context';
 import TodoItem from './TodoItem';
 import classes from './Todos.module.css';
 
-const Todos: React.FC = () => {
+const Todos = () => {
   const { todos, removeTodoHandler } = useTodoContext();
 
   return (

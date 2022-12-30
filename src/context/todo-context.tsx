@@ -7,15 +7,15 @@ type TodoContextObj = {
   removeTodoHandler: (todoId: number) => void;
 };
 
+type TodoContextProp = { children: React.ReactNode };
+
 const TodoContext = createContext<TodoContextObj>({
   todos: [],
   addNewTodoHandler: (newTodo: string) => {},
   removeTodoHandler: (todoId: number) => {},
 });
 
-const TodoContextProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const TodoContextProvider = ({ children }: TodoContextProp) => {
   const [todos, setTodos] = useState<Todo[]>(
     JSON.parse(localStorage.getItem('todos') || '[]')
   );

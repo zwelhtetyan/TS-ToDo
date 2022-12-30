@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useTodoContext } from '../context/todo-context';
 import classes from './NewTodo.module.css';
 
-const NewTodo: React.FC = () => {
+const NewTodo = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { addNewTodoHandler } = useTodoContext();
